@@ -17,10 +17,6 @@
         WindowStartupLocation ="CenterScreen"
         Title="Quản lý" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="347*"/>
-            <ColumnDefinition Width="149*"/>
-        </Grid.ColumnDefinitions>
         <TabControl Margin="5" BorderThickness="0" Background="#FFCECEFF" FontSize="20" Grid.ColumnSpan="2">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -48,73 +44,316 @@
                 </Style>
             </TabControl.Resources>
             <TabItem Header="Thanh toán">
-                <StackPanel>
-                    <DockPanel
-                        LastChildFill="True">
-                        <TextBox 
-                            DockPanel.Dock="Left"
-                            Name="tbxSoLuong" 
-                            Width="200" Height="50" 
-                            HorizontalAlignment="Right" 
-                            materialDesign:HintAssist.Hint="Số lượng"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        </TextBox>
-                        <ComboBox
-                            DockPanel.Dock="Right"
-                            Name="tbxTimkiem"
-                            materialDesign:HintAssist.Hint="Tìm kiếm" 
-                            Width="auto" Height="50"
-                            FontSize="20"
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                            KeyDown="tbxTimkiem_KeyDown">
-                        </ComboBox>
-                    </DockPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="10*" />
-                        </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="17*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                        <DockPanel
+                                LastChildFill="True">
+                            <TextBox 
+                                DockPanel.Dock="Left"
+                                Name="TTtxtSoLuong" 
+                                Width="200" Height="50" 
+                                HorizontalAlignment="Right" 
+                                materialDesign:HintAssist.Hint="Số lượng"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            </TextBox>
+                            <ComboBox
+                                DockPanel.Dock="Right"
+                                Name="TTtxtTimKiem"
+                                IsEditable="True"
+                                materialDesign:HintAssist.Hint="Tìm kiếm" 
+                                Width="auto" Height="50"
+                                FontSize="20"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                Text="{Binding SelectedItemText, Mode=TwoWay}"
+                                ItemsSource="{Binding searchDATA}">
+                            </ComboBox>
+                        </DockPanel>
 
-
-                        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-                            <DataGrid
-                                Margin="0 8 0 0"
-                                ItemsSource="{Binding ItemSource}"
-                                CanUserSortColumns="True"
-                                CanUserAddRows="False"
-                                AutoGenerateColumns="False"
-                                materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-                                materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                                Name="DataGridItems"
-                                SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn
-                                        Binding="{Binding MASANPHAM}"
-                                        Header="Mã SP" 
-                                        IsReadOnly="True"/>
-                                    <materialDesign:MaterialDataGridTextColumn
-                                        Binding="{Binding TENSANPHAM}"
-                                        Header="Tên sản phẩm" 
-                                        IsReadOnly="True"/>
-                                    <DataGridTextColumn
-                                        Binding="{Binding PRICE}"
-                                        Header="Giá" 
-                                        IsReadOnly="True"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                    </StackPanel>
+                    <DataGrid
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 8 0 0"
+                        ItemsSource="{Binding hoadontt}"
+                        CanUserSortColumns="True"
+                        CanUserAddRows="False"
+                        AutoGenerateColumns="False"
+                        materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                        materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                        Name="TTDataGridItems"
+                        MaxHeight="400"
+                        SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                MinWidth="70"
+                                Binding="{Binding MASP}"
+                                Header="Mã SP" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                MinWidth="450"
+                                Binding="{Binding TENSANPHAM}"
+                                Header="Tên sản phẩm" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THUONGHIEU}"
+                                Header="Thương hiệu" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SOLUONG}"
+                                Header="Số lượng" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding DONGIA}"
+                                Header="Đơn giá" 
+                                IsReadOnly="True"/>
+                            <DataGridTextColumn
+                                Binding="{Binding GIA}"
+                                Header="Giá" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel
+                        Grid.Column="0"
+                        Grid.Row="2">
+                        <StackPanel
+                            Name="TTGiamGia"
+                            Visibility="Visible"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                            <TextBlock
+                                Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                Giảm giá
+                            </TextBlock>
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                Name="TTtxtGiamGia"
+                                MinWidth="150"
+                                Text="{Binding Path= txtGiamGia}"
+                                HorizontalAlignment="Right"
+                                TextAlignment="Right"
+                                Style="{StaticResource MaterialDesignTitleTextBlock}">
+                            </TextBlock>
                         </StackPanel>
-                    </Grid>
-                </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                            <TextBlock
+                                Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                Thành tiền
+                            </TextBlock>
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                Name="TTtxtTongTien"
+                                MinWidth="150"
+                                Text="{Binding Path= txtTongTien}"
+                                HorizontalAlignment="Right"
+                                TextAlignment="Right"
+                                Style="{StaticResource MaterialDesignTitleTextBlock}" >
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="5"
+                        Grid.Column="1" Grid.RowSpan="2">
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="TTbtnThemVaoHoaDon"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            MinWidth="70" Height="50"
+                            Click="TTbtnThemVaoHoaDon_Click">
+                            Chọn
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="TTbtnKHTT"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            MinWidth="70" Height="50"
+                            Click="TTbtnKHTT_Click">
+                            KHTT
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="TTbtnDiscount"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            MinWidth="70" Height="50"
+                            Click="TTbtnDiscount_Click">
+                            Chiết khấu
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="TTbtnXoaSanPham"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            MinWidth="70" Height="50"
+                            Click="TTbtnXoaSanPham_Click">
+                            Bỏ chọn
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="TTbtnLapHoaDon"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            MinWidth="70" Height="50"
+                            Click="TTbtnLapHoaDon_Click">
+                            Lập hóa đơn
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </TabItem>
+            
+            
             <TabItem Header="Quản lý">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="11*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="12*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <DockPanel
+                                LastChildFill="True">
+                            <ComboBox
+                                DockPanel.Dock="Left"
+                                Name="QLSPtxtTimKiem"
+                                IsEditable="True"
+                                materialDesign:HintAssist.Hint="Tìm kiếm" 
+                                MinWidth="700" Height="50"
+                                FontSize="20"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            </ComboBox>
+                            <ComboBox
+                                DockPanel.Dock="Left"
+                                Name="QLSPcbxType"
+                                materialDesign:HintAssist.Hint="{Binding QLSPcbxChoose}" 
+                                MinWidth="170" Height="50"
+                                FontSize="20"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                SelectedItem="Sản Phẩm" 
+                                ItemsSource="{Binding QLSPcbxSource}">
+                            </ComboBox>
+                        </DockPanel>
+                    </StackPanel>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="DataGridSANPHAM"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                MinWidth="50"
+                                Binding="{Binding MASANPHAM}"
+                                Header="Mã SP" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                MinWidth="150"
+                                Binding="{Binding TENSANPHAM}"
+                                Header="Tên sản phẩm" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THUONGHEU}"
+                                Header="Thương hiệu" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding PRICE}"
+                                Header="Nhà sản xuất" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding PRICE}"
+                                Header="NSX" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                        Visibility="Visible"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 8 0 0"
+                        ItemsSource="{Binding ItemSource}"
+                        CanUserSortColumns="True"
+                        CanUserAddRows="False"
+                        AutoGenerateColumns="False"
+                        materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                        materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                        Name="DataGridHOADON"
+                        SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                MinWidth="50"
+                                Binding="{Binding MASANPHAM}"
+                                Header="Mã HD" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                MinWidth="150"
+                                Binding="{Binding TENSANPHAM}"
+                                Header="Số lượng" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding PRICE}"
+                                Header="Thương hiệu" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding PRICE}"
+                                Header="Nhà sản xuất" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding PRICE}"
+                                Header="NSX" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel
+                            Margin="1"
+                            Grid.Column="1" Grid.RowSpan="2">
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="QLSPbtnAdd"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="70" Height="50"
+                            Click="QLSPbtnAdd_Click">
+                            Thêm
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="QLSPbtnEdit"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="70" Height="50"
+                            Click="QLSPbtnEdit_Click">
+                            Sửa
+                        </Button>
+                        <Button
+                            Margin="1,1,1,1"
+                            Name="QLSPbtnDel"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="70" Height="50"
+                            Click="QLSPbtnDel_Click">
+                            Xóa
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Thống kê">
 
             </TabItem>
-            <TabItem Header="Tài khoản">
+            <TabItem Header="Quản lý tài khoản">
 
             </TabItem>
         </TabControl>

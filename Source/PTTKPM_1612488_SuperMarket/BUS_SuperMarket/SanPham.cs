@@ -61,7 +61,35 @@ namespace BUS_SuperMarket
             return result;
         }
 
+        public List<SANPHAM> GetAllSANPHAM()
+        {
+            List<SANPHAM> result;
 
+            var pd = new Product();
+            result = pd.getAllSanPham();
+
+            return result;
+        }
+
+        public SANPHAM GetSANPHAMTheoMASP(string masp)
+        {
+            SANPHAM result;
+
+            var pd = new Product();
+            result = pd.getSanPhamTheoMASP(masp);
+
+            return result;
+        }
+
+        public List<SANPHAM> getDanhSachSP()
+        {
+            List<SANPHAM> result  = new List<SANPHAM>();
+
+            var pd = new Product();
+            result = pd.getDanhSachSP();
+
+            return result;
+        }
 
     }
 }

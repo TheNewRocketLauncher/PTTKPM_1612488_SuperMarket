@@ -29,32 +29,43 @@ namespace SuperMarket
 
         private void DangNhap()
         {
-            var login = new Login();
             string tendangnhap = tbxUsername.Text;
             string matkhau = tbxPassword.Password.ToString();
 
-            var result = login.dangNhap(tendangnhap, matkhau);
-            if (result._is_Success)
+            if (tendangnhap.Length == 0)
             {
-                UserInfo user = new UserInfo(tendangnhap, matkhau, Convert.ToInt32(result._result));
-
-                bool isQuanLy = login.isQuanLy(user._IDUser)._is_Success;
-                if (isQuanLy)
-                {
-                    MainWindowsQuanLy mainWindow = new MainWindowsQuanLy(user);
-                    mainWindow.Show();
-                }
-                else
-                {
-                    MainWindowsNhanVien mainWindow = new MainWindowsNhanVien(user);
-                    mainWindow.Show();
-                }
-
-                this.Close();
+                Mess mess = new Mess("Vui lòng điền tên đăng nhập");
+            }
+            else if (matkhau.Length == 0)
+            {
+                Mess mess = new Mess("Vui lòng điền tên đăng nhập");
             }
             else
             {
-                MessageBox.Show(result._error);
+                var login = new Login();
+                var result = login.dangNhap(tendangnhap, matkhau);
+                if (result._is_Success)
+                {
+                    UserInfo user = new UserInfo(tendangnhap, matkhau, Convert.ToInt32(result._result));
+
+                    bool isQuanLy = login.isQuanLy(user._IDUser)._is_Success;
+                    if (isQuanLy)
+                    {
+                        MainWindowsQuanLy mainWindow = new MainWindowsQuanLy(user);
+                        mainWindow.Show();
+                    }
+                    else
+                    {
+                        MainWindowsNhanVien mainWindow = new MainWindowsNhanVien(user);
+                        mainWindow.Show();
+                    }
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(result._error);
+                }
             }
         }
 

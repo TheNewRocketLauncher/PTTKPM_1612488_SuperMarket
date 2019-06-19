@@ -55,7 +55,7 @@
           </Key>
           <Property Name="MALOAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TENLOAI" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MASP" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MASP" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -361,7 +361,7 @@
           </Key>
           <Property Name="MALOAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TENLOAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.FK_SANPHAM_LOAISANPHAM" FromRole="LOAISANPHAM" ToRole="SANPHAM" />
         </EntityType>
         <EntityType Name="NHANVIEN">

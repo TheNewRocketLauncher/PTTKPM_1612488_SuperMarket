@@ -71,68 +71,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CHIETKHAU.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="CHITIETHOADON.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="HOADON.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="KHTT.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="LOAISANPHAM.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="NEWDAY_MARKETEntitiesModel.Context.cs">
+    <Compile Include="NEWDAY_MARKET_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.Context.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="NEWDAY_MARKETEntitiesModel.cs">
+    <Compile Include="NEWDAY_MARKET_Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="NEWDAY_MARKETEntitiesModel.Designer.cs">
+    <Compile Include="NEWDAY_MARKET_Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.edmx</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="NHANVIEN.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="PHIEUNHAPHANG.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="PHIEUXUATHANG.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QUANLY.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SANPHAM.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="THUONG.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="USER_ACCOUNT.cs">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.tt</DependentUpon>
+      <DependentUpon>NEWDAY_MARKET_Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="NEWDAY_MARKETEntitiesModel.edmx">
+    <EntityDeploy Include="NEWDAY_MARKET_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NEWDAY_MARKETEntitiesModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>NEWDAY_MARKET_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="NEWDAY_MARKETEntitiesModel.edmx.diagram">
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.edmx</DependentUpon>
+    <None Include="NEWDAY_MARKET_Model.edmx.diagram">
+      <DependentUpon>NEWDAY_MARKET_Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -150,15 +150,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NEWDAY_MARKETEntitiesModel.Context.tt">
+    <Content Include="NEWDAY_MARKET_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.edmx</DependentUpon>
-      <LastGenOutput>NEWDAY_MARKETEntitiesModel.Context.cs</LastGenOutput>
+      <DependentUpon>NEWDAY_MARKET_Model.edmx</DependentUpon>
+      <LastGenOutput>NEWDAY_MARKET_Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="NEWDAY_MARKETEntitiesModel.tt">
+    <Content Include="NEWDAY_MARKET_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NEWDAY_MARKETEntitiesModel.edmx</DependentUpon>
-      <LastGenOutput>NEWDAY_MARKETEntitiesModel.cs</LastGenOutput>
+      <DependentUpon>NEWDAY_MARKET_Model.edmx</DependentUpon>
+      <LastGenOutput>NEWDAY_MARKET_Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

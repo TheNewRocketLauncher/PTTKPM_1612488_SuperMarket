@@ -60,6 +60,41 @@ namespace DAL_SuperMarket
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="masp"></param>
+        /// <returns></returns>
+        public SANPHAM getSanPhamTheoMASP(string masp)
+        {
+            SANPHAM result = null;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.SANPHAM.FirstOrDefault(b => b.MASP == masp);
+
+            return result;
+        }
+
+        public List<SANPHAM> getDanhSachSP()
+        {
+            List<SANPHAM> result = new List<SANPHAM>();
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.SANPHAM.SqlQuery("SELETE TENSANPHAM FROM SANPHAM").ToList();
+
+            return result;
+        }
+
+        public List<SANPHAM> getAllSanPham()
+        {
+            List<SANPHAM> result = null;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.SANPHAM.ToList();
+
+            return result;
+        }
+
+        /// <summary>
         /// Thêm sản phẩm
         /// </summary>
         /// <param name="tensp"></param>
@@ -73,18 +108,25 @@ namespace DAL_SuperMarket
             var result = new Result(false, "", "");
 
             var db = new NEWDAY_MARKETEntities();
-            var u = db.SANPHAM.Where(b => b.TENSP == sp.MASP && b.THUONGHIEU == sp.THUONGHIEU && b.NSX == sp.NSX);
+            var u = db.SANPHAM.FirstOrDefault(b => b.TENSP == sp.MASP);
 
             if (u == null)
             {
                 try
                 {
                     var newsp = new SANPHAM();
+
+                    newsp.MASP = sp.MASP;
                     newsp.TENSP = sp.MASP;
                     newsp.NSX = sp.NSX;
                     newsp.THUONGHIEU = sp.THUONGHIEU;
                     newsp.GIATIEN = sp.GIATIEN;
                     newsp.TINHTRANG = sp.TINHTRANG;
+                    newsp.SLBB = sp.SLBB;
+                    newsp.SLTONKHO = sp.SLTONKHO;
+                    newsp.MALOAI = sp.MALOAI;
+                    newsp.THOIHAN = sp.THOIHAN;
+
                     db.SANPHAM.Add(newsp);
                     db.SaveChanges();
                     result._is_Success = true;
