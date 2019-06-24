@@ -14,53 +14,29 @@ using System.Windows.Shapes;
 using Fluent;
 using DAL_SuperMarket;
 using BUS_SuperMarket;
+using PublicClass;
 
 namespace SuperMarket
 {
     /// <summary>
-    /// Interaction logic for AddSP.xaml
+    /// Interaction logic for AddLOAISANPHAM.xaml
     /// </summary>
-    public partial class AddSP : RibbonWindow
+    public partial class AddLOAISANPHAM : RibbonWindow
     {
-        public AddSP()
+        public AddLOAISANPHAM()
         {
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(AddSPLoaded);
-        }
-
-        private void AddSPLoaded(object sender, RoutedEventArgs e)
-        {
-            List<string> searchDATA = new List<string>();
-
-            var lsp = new LoaiSanPham();
-            List<LOAISANPHAM> lOAISANPHAMs = lsp.GetAllLoaiSanPham();
-            foreach (var item in lOAISANPHAMs)
-            {
-                searchDATA.Add(item.TENLOAI.ToString());
-            }
-
-            txtMALOAI.ItemsSource = searchDATA;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var newSP = new SANPHAM();
-                newSP.MASP = txtMASP.Text;
-                newSP.TENSP = txtTENSANPHAM.Text;
-                newSP.THUONGHIEU = txtTHUONGHIEU.Text;
-                newSP.TINHTRANG = txtTINHTRANG.Text;
-                newSP.SLBB = 0;
-                newSP.SLTONKHO = 0;
-                newSP.GIATIEN = Convert.ToInt32(txtGIATIEN.Text);
-                newSP.NSX = DateNSX.SelectedDate;
-                newSP.THOIHAN = DateTHOIHAN.SelectedDate;
-                var lsp = new LoaiSanPham();
-                newSP.MALOAI = lsp.GetMaLoaiSanPham(txtMALOAI.Text);
+                var newLSP = new LOAISANPHAM();
+                newLSP.TENLOAI = txtTENLOAI.Text;
 
-               var sp = new SanPham();
-                var result = sp.ThemSanPham(newSP);
+                var lsp = new LoaiSanPham();
+                var result = lsp.ThemLoaiSanPham(newLSP);
 
                 if (result._is_Success)
                 {
@@ -80,19 +56,14 @@ namespace SuperMarket
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Bạn có muốn hủy không ? Nhưng thông tin bạn nhập vẫn chưa được lưu", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 this.Close();
             }
             else
             {
-                
+
             }
-        }
-
-        private void txtMALOAI_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

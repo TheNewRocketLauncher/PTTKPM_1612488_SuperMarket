@@ -80,16 +80,7 @@ namespace BUS_SuperMarket
 
             return result;
         }
-
-        public List<SANPHAM> getDanhSachSP()
-        {
-            List<SANPHAM> result  = new List<SANPHAM>();
-
-            var pd = new Product();
-            result = pd.getDanhSachSP();
-
-            return result;
-        }
+        
 
     }
 }

@@ -15,7 +15,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}" 
         WindowStartupLocation ="CenterScreen"
-        Title="Tạo tài khoảng KHTT" Height="300" Width="350">
+        Title="Tạo tài khoảng KHTT" Height="300" Width="350" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -42,23 +42,10 @@
                 <TextBlock
                     MinWidth="70"
                     Style="{StaticResource MaterialDesignSubheadingTextBlock}">
-                    Hộ và tên
-                </TextBlock>
-                <TextBox
-                    Name="tbxName"
-                    Width="200"
-                    materialDesign:TransitionAssist.DisableTransitions="True" />
-            </DockPanel>
-            <DockPanel
-                LastChildFill="True"
-                HorizontalAlignment="Left">
-                <TextBlock
-                    MinWidth="70"
-                    Style="{StaticResource MaterialDesignSubheadingTextBlock}">
                     CMND
                 </TextBlock>
                 <TextBox
-                    Name="tbxCMND"
+                    Name="txtCMND"
                     Width="200"
                     materialDesign:TransitionAssist.DisableTransitions="True" />
             </DockPanel>
@@ -71,10 +58,26 @@
                     SDT
                 </TextBlock>
                 <TextBox
-                    Name="SDT"
+                    Name="txtSDT"
                     Width="200"
                     materialDesign:TransitionAssist.DisableTransitions="True" />
             </DockPanel>
         </StackPanel>
+        <Canvas>
+            <Button
+              Margin="0,0,0,0"
+              Name="btnAdd"
+              Style="{StaticResource MaterialDesignRaisedLightButton}" Height="45"
+              Click="btnAdd_Click" Canvas.Left="20" Canvas.Top="211" Width="144">
+                Thêm
+            </Button>
+            <Button
+              Margin="0,0,0,0"
+              Name="btnCancel"
+              Style="{StaticResource MaterialDesignRaisedLightButton}" Height="45"
+              Click="btnCancel_Click" Canvas.Left="178" Canvas.Top="212" Width="144">
+                Hủy
+            </Button>
+        </Canvas>
     </Grid>
 </Fluent:RibbonWindow>

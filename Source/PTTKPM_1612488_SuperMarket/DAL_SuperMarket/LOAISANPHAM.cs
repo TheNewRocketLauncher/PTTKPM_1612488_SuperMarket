@@ -22,7 +22,6 @@ namespace DAL_SuperMarket
     
         public int MALOAI { get; set; }
         public string TENLOAI { get; set; }
-        public string MASP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SANPHAM> SANPHAM { get; set; }

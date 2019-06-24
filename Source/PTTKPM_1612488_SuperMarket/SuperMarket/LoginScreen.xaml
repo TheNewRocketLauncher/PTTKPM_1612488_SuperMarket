@@ -29,14 +29,14 @@
             <TextBox 
                 Padding="3 0 0 0" 
                 Name="tbxUsername" 
-                materialDesign:HintAssist.Hint="Username" 
+                materialDesign:HintAssist.Hint="Tên đăng nhập" 
                 Width="200" 
                 Background="White" 
                 CaretBrush="#FF5B5BE4"/>
             <PasswordBox 
                 Padding="3 0 0 0" 
                 Name="tbxPassword" 
-                materialDesign:HintAssist.Hint="Password" 
+                materialDesign:HintAssist.Hint="Mật khẩu" 
                 Width="200" 
                 Background="White"
                 KeyDown="tbxPassword_KeyDown"/>

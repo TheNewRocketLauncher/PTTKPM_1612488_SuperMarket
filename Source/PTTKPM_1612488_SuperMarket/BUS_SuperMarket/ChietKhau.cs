@@ -8,7 +8,7 @@ using PublicClass;
 
 namespace BUS_SuperMarket
 {
-    public class ChieKhau
+    public class ChietKhau
     {
         public List<CHIETKHAU> GetChietKhau(string masp, DateTime date)
         {
@@ -16,6 +16,16 @@ namespace BUS_SuperMarket
 
             var pd = new Product();
             result = pd.getChietKhau(masp, date);
+
+            return result;
+        }
+
+        public List<CHIETKHAU> GetAllChietKhau()
+        {
+            List<CHIETKHAU> result;
+
+            var pd = new Product();
+            result = pd.getAllChietKhau();
 
             return result;
         }

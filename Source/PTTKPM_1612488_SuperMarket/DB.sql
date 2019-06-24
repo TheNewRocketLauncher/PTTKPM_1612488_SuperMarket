@@ -52,7 +52,7 @@ alter table QUANLY add
 GO
 
 Create table SANPHAM(
-	MASP VARCHAR(10) NOT NULL,
+	MASP VARCHAR(50) NOT NULL,
 	TENSP NVARCHAR(50),
 	MALOAI int,
 	NSX DATETIME,	
@@ -67,7 +67,7 @@ Create table SANPHAM(
 GO
 create table CHIETKHAU(
 	STT int identity(1,1),
-	MASP VARCHAR(10) NOT NULL,
+	MASP VARCHAR(50) NOT NULL,
 	CK real,
 	THOIGIANBD DATETIME,
 	THOIGIANKT DATETIME,
@@ -79,14 +79,13 @@ GO
 CREATE TABLE LOAISANPHAM(
 	MALOAI int identity(1,1),
 	TENLOAI NVARCHAR(50) not null,
-	MASP VARCHAR(10),
 	PRIMARY KEY(MALOAI)
 )
 GO
 
 CREATE TABLE PHIEUNHAPHANG(
 	STT int identity(1,1),
-	MASP VARCHAR(10),
+	MASP VARCHAR(50),
 	SL int,
 	primary key(STT)
 )
@@ -94,7 +93,7 @@ GO
 
 CREATE TABLE PHIEUXUATHANG(
 	STT int identity(1,1),
-	MASP VARCHAR(10),
+	MASP VARCHAR(50),
 	SL int,
 	primary key(STT)
 )
@@ -103,7 +102,7 @@ GO
 CREATE TABLE HOADON(
 	MAHD int identity(1,1),
 	NGAYTT DATETIME,
-	MAKHTT varchar(10),
+	MAKHTT int,
 	TONGTIEN decimal(19,4),
 	primary key(MAHD)
 )
@@ -112,7 +111,7 @@ GO
 CREATE TABLE CHITIETHOADON(
 	STT int identity(1,1),
 	MAHD int,
-	MASP VARCHAR(10) not null,
+	MASP VARCHAR(50) not null,
 	SL int not null,
 	DONGIA decimal(19,4),
 	CHIETKHAU real,
@@ -138,6 +137,9 @@ GO
 alter table SANPHAM add
 	constraint FK_SANPHAM_LOAISANPHAM foreign key (MALOAI) references LOAISANPHAM (MALOAI)
 GO
+alter table HOADON add
+	constraint FK_HOADON_KHTT foreign key (MAKHTT) references KHTT (MAKHTT)
+GO
 alter table PHIEUNHAPHANG add
 	constraint FK_PHIEUNHAPHANG_SANPHAM foreign key (MASP) references SANPHAM (MASP)
 GO
@@ -156,6 +158,8 @@ GO
 
 
 
+USE NEWDAY_MARKET
+GO
 
 insert into NHANVIEN (IDUSER, HOTEN, PHAI, DIACHI, SDT, NGAYSINH, EMAIL, CMND, ISENABLED) values ('001', N'Nguyễn Văn A', 1, N'123', 0922323232, 1/9/2003, 'abc1@xyz.com', 022112222, 1)
 insert into NHANVIEN (IDUSER, HOTEN, PHAI, DIACHI, SDT, NGAYSINH, EMAIL, CMND, ISENABLED) values ('002', N'Nguyễn Văn B', 0, N'456', 0844545454, 2/8/2003, 'abc2@xyz.com', 022112223, 1)
@@ -182,5 +186,59 @@ GO
 insert into USER_ACCOUNT(IDUSER,TENDANGNHAP,MATKHAU,USER_TYPE,IS_USING) values ('005','nv3','123',0,'0')
 GO
 
---insert into SANPHAM(MASP,TENSP,MALOAI,NSX,THOIHAN,THUONGHIEU,GIATIEN,SLTONKHO,SLBB,TINHTRANG) values ()
---GO
+
+insert into LOAISANPHAM(TENLOAI) values (N'Sách')
+Go 
+insert into LOAISANPHAM(TENLOAI) values (N'Viết')
+Go 
+insert into LOAISANPHAM(TENLOAI) values (N'Thức ăn')
+Go 
+insert into LOAISANPHAM(TENLOAI) values (N'Mỹ phẩm')
+Go 
+
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)	 
+values ('SGKL10H',N'Sách giáo khoa Hóa lớp 10', '1', '01/01/2019','01/01/2019', N'Nhà xuất bản giáo dục', 12000, 300, 30, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('SGKL10T',N'Sách giáo khoa Toán lớp 10', '1', '01/01/2019','01/01/2019', N'Nhà xuất bản giáo dục', 13700, 300, 50, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('SGKL10SI',N'Sách giáo khoa Sinh lớp 10', '1', '01/01/2019','01/01/2019', N'Nhà xuất bản giáo dục', 17800, 300, 40, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('SGKL10L',N'Sách giáo khoa Lý lớp 10', '1', '01/01/2019','01/01/2019', N'Nhà xuất bản giáo dục', 16300, 300, 30, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('SGKL10SU',N'Sách giáo khoa Sử lớp 10', '1', '01/01/2019','01/01/2019', N'Nhà xuất bản giáo dục', 12200, 0, 0, N'Hết') 
+GO
+
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('VBTL',N'Bút bi Thiên Long', '2', '01/01/2019','01/01/2019', N'Thiên Long', 2500, 300, 30, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('VCPT',N'Bút chì Pentel', '2', '01/01/2019','01/01/2019', N'Pentel', 21500, 50, 50, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('VCM',N'Hộp bút chì màu Thiên Long', '2', '01/01/2019','01/01/2019', 'Thiên Long', 16000, 100, 20, N'Còn hàng') 
+GO
+
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('TASG',N'Kẹo Singgum 500', '3', '01/01/2019','01/01/2020', 'Hãng abcxyz', 500, 100, 50, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('TASC',N'Sữa chua Vinamilk', '3', '01/01/2019','01/01/2020', 'Vinamilk', 8000, 100, 50, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('TAMTH',N'Men tiêu hóa Proby', '3', '01/01/2019','01/01/2020', 'Proby', 3000, 100, 50, N'Còn hàng') 
+GO
+
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('MPDGD',N'Dầu gội đầu Clearman', '4', '01/01/2019','01/01/2020', 'Proby', 25000, 100, 50, N'Còn hàng') 
+GO
+insert into SANPHAM(MASP, TENSP, MALOAI, NSX, THOIHAN, THUONGHIEU, GIATIEN, SLTONKHO, SLBB, TINHTRANG)
+	 values ('XPPLAYBOY',N'Xà phòng Playboy', '4', '01/01/2019','01/01/2019', 'Proby', 7000, 100, 50, N'Còn hàng') 
+GO
+
+insert into KHTT(CMND,SDT,BAC,THOIHAN,TIENTL)
+	 values ('1122334455','0999228322',0,2/08/2019,2000000)
+GO

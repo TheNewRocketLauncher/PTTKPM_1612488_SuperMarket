@@ -18,52 +18,56 @@ using BUS_SuperMarket;
 namespace SuperMarket
 {
     /// <summary>
-    /// Interaction logic for AddSP.xaml
+    /// Interaction logic for AddPHIEUXUATHANG.xaml
     /// </summary>
-    public partial class AddSP : RibbonWindow
+    public partial class AddPHIEUXUATHANG : RibbonWindow
     {
-        public AddSP()
+        public AddPHIEUXUATHANG()
         {
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(AddSPLoaded);
+            this.Loaded += new RoutedEventHandler(MainWindowsQuanLyLoaded);
         }
 
-        private void AddSPLoaded(object sender, RoutedEventArgs e)
+        private void MainWindowsQuanLyLoaded(object sender, RoutedEventArgs e)
         {
             List<string> searchDATA = new List<string>();
 
-            var lsp = new LoaiSanPham();
-            List<LOAISANPHAM> lOAISANPHAMs = lsp.GetAllLoaiSanPham();
-            foreach (var item in lOAISANPHAMs)
+            var sp = new SanPham();
+            List<SANPHAM> sANPHAMs = sp.GetAllSANPHAM();
+            foreach (var item in sANPHAMs)
             {
-                searchDATA.Add(item.TENLOAI.ToString());
+                searchDATA.Add(item.MASP);
             }
 
-            txtMALOAI.ItemsSource = searchDATA;
+            txtTimKiem.ItemsSource = searchDATA;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var newSP = new SANPHAM();
-                newSP.MASP = txtMASP.Text;
-                newSP.TENSP = txtTENSANPHAM.Text;
-                newSP.THUONGHIEU = txtTHUONGHIEU.Text;
-                newSP.TINHTRANG = txtTINHTRANG.Text;
-                newSP.SLBB = 0;
-                newSP.SLTONKHO = 0;
-                newSP.GIATIEN = Convert.ToInt32(txtGIATIEN.Text);
-                newSP.NSX = DateNSX.SelectedDate;
-                newSP.THOIHAN = DateTHOIHAN.SelectedDate;
-                var lsp = new LoaiSanPham();
-                newSP.MALOAI = lsp.GetMaLoaiSanPham(txtMALOAI.Text);
+                var newpxh = new PHIEUXUATHANG();
+                newpxh.MASP = txtTimKiem.SelectedItem.ToString();
+                newpxh.SL = Convert.ToInt32(txtSoLuong.Text);
 
-               var sp = new SanPham();
-                var result = sp.ThemSanPham(newSP);
+                var pnh = new PhieuXuatHang();
+                var result = pnh.ThemPhieuXuatHang(newpxh);
 
                 if (result._is_Success)
                 {
+                    try
+                    {
+                        var sp = new SanPham();
+                        var sptemp = sp.GetSANPHAMTheoMASP(newpxh.MASP);
+                        sptemp.SLTONKHO += newpxh.SL;
+                        sptemp.SLBB += newpxh.SL;
+
+                        sp.SuaSanPham(sptemp);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Lỗi khi cập nhật số lượng sản phẩm");
+                    }
                     MessageBox.Show("Thêm thành công");
                 }
                 else
@@ -80,19 +84,14 @@ namespace SuperMarket
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Bạn có muốn hủy không ? Nhưng thông tin bạn nhập vẫn chưa được lưu", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 this.Close();
             }
             else
             {
-                
+
             }
-        }
-
-        private void txtMALOAI_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -20,12 +20,22 @@ namespace BUS_SuperMarket
             return result;
         }
 
-        public List<HOADON> GetHoaDonThemNgay(DateTime date1, DateTime date2)
+        public HOADON GetHoaDonThemNgay(DateTime date1, DateTime date2)
+        {
+            HOADON result;
+
+            var pd = new Product();
+            result = pd.getHoaDonTheoNgay(date1, date2);
+
+            return result;
+        }
+
+        public List<HOADON> GetAllHoaDon()
         {
             List<HOADON> result;
 
             var pd = new Product();
-            result = pd.getHoaDonTheoNgay(date1, date2);
+            result = pd.getAllHoaDon();
 
             return result;
         }

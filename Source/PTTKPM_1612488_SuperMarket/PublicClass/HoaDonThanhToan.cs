@@ -14,6 +14,7 @@ namespace PublicClass
         public int SOLUONG { get; set; }
         public decimal DONGIA { get; set; }
         public decimal GIA { get; set; }
-        public decimal GIAMGIA { get; set; }
+        public float GIAMGIA { get; set; }
+        public int MAKHTT { get; set; }
     }
 }

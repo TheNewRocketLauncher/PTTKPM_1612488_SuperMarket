@@ -8,7 +8,7 @@ using PublicClass;
 
 namespace BUS_SuperMarket
 {
-    class PhieuXuatHang
+    public class PhieuXuatHang
     {
         public List<PHIEUXUATHANG> GetPhieuXuatHang(string masp)
         {
@@ -20,6 +20,15 @@ namespace BUS_SuperMarket
             return resutl;
         }
 
+        public List<PHIEUXUATHANG> GetAllPhieuXuatHang()
+        {
+            List<PHIEUXUATHANG> resutl;
+
+            var pd = new Product();
+            resutl = pd.getAllPhieuXuatHang();
+
+            return resutl;
+        }
         public Result ThemPhieuXuatHang(PHIEUXUATHANG pxh)
         {
             Result result = new Result();

@@ -20,6 +20,16 @@ namespace BUS_SuperMarket
             return result;
         }
 
+        public List<KHTT> GetAllKHTT()
+        {
+            List<KHTT> result;
+
+            var pd = new Product();
+            result = pd.getAllKhtt();
+
+            return result;
+        }
+
         public Result ThemKHTT(KHTT khtt)
         {
             Result result = new Result();

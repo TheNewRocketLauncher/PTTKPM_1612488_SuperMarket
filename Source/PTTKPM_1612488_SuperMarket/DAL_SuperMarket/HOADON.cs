@@ -22,10 +22,11 @@ namespace DAL_SuperMarket
     
         public int MAHD { get; set; }
         public Nullable<System.DateTime> NGAYTT { get; set; }
-        public string MAKHTT { get; set; }
+        public Nullable<int> MAKHTT { get; set; }
         public Nullable<decimal> TONGTIEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETHOADON> CHITIETHOADON { get; set; }
+        public virtual KHTT KHTT { get; set; }
     }
 }

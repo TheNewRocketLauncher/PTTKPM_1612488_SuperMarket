@@ -35,6 +35,7 @@ namespace DAL_SuperMarket
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
 
+
         public virtual DbSet<CHIETKHAU> CHIETKHAU { get; set; }
         public virtual DbSet<CHITIETHOADON> CHITIETHOADON { get; set; }
         public virtual DbSet<HOADON> HOADON { get; set; }
@@ -45,6 +46,7 @@ namespace DAL_SuperMarket
         public virtual DbSet<PHIEUXUATHANG> PHIEUXUATHANG { get; set; }
         public virtual DbSet<QUANLY> QUANLY { get; set; }
         public virtual DbSet<SANPHAM> SANPHAM { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<THUONG> THUONG { get; set; }
         public virtual DbSet<USER_ACCOUNT> USER_ACCOUNT { get; set; }
     }

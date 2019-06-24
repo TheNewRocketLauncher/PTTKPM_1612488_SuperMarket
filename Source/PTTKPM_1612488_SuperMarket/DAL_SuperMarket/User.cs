@@ -22,26 +22,35 @@ namespace DAL_SuperMarket
             var result = new Result(false, "", "");
 
             var db = new NEWDAY_MARKETEntities();
-            var u1 = db.USER_ACCOUNT.FirstOrDefault(b => b.TENDANGNHAP == TenDangNhap);
-            if (u1 != null)
+            try
             {
-                if(u1.MATKHAU.ToString() == MatKhau)
+                var u1 = db.USER_ACCOUNT.FirstOrDefault(b => b.TENDANGNHAP == TenDangNhap);
+                if (u1 != null)
                 {
-                    result._is_Success = true;
-                    result._result = u1.IDUSER;
+                    if (u1.MATKHAU.ToString() == MatKhau)
+                    {
+                        result._is_Success = true;
+                        result._result = u1.IDUSER;
+                    }
+                    else
+                    {
+                        result._is_Success = false;
+                        result._error = "Sai mật khẩu";
+                    }
                 }
                 else
                 {
                     result._is_Success = false;
-                    result._error = "Sai mật khẩu";
+                    result._error = "Sai tên đăng nhập";
                 }
             }
-            else
+            catch
             {
                 result._is_Success = false;
                 result._error = "Sai tên đăng nhập";
             }
-
+            finally { 
+}
             return result;
         }
 

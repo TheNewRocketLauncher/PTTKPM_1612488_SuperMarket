@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0468746acbea40e68fe76e37016156db" Name="Diagram1">
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.CHIETKHAU" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.CHITIETHOADON" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.HOADON" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.KHTT" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.NHANVIEN" Width="1.5" PointX="7.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.PHIEUNHAPHANG" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.PHIEUXUATHANG" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.QUANLY" Width="1.5" PointX="10" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.SANPHAM" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.THUONG" Width="1.5" PointX="10" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NEWDAY_MARKETModel.USER_ACCOUNT" Width="1.5" PointX="10" PointY="16.25" IsExpanded="true" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_CHIETKHAU_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_CHITIETHOADON_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_CHITIETHOADON_KHTT" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_CHITIETHOADON_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_HOADON_KHTT" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_SANPHAM_LOAISANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_QUANLY_NHANVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_THUONG_NHANVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_USER_ACCOUNT_QUANLY" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_PHIEUNHAPHANG_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="NEWDAY_MARKETModel.FK_PHIEUXUATHANG_SANPHAM" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

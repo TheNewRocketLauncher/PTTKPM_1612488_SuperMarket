@@ -73,17 +73,11 @@ namespace DAL_SuperMarket
 
             return result;
         }
-
-        public List<SANPHAM> getDanhSachSP()
-        {
-            List<SANPHAM> result = new List<SANPHAM>();
-
-            var db = new NEWDAY_MARKETEntities();
-            result = db.SANPHAM.SqlQuery("SELETE TENSANPHAM FROM SANPHAM").ToList();
-
-            return result;
-        }
-
+        
+        /// <summary>
+        /// Lấy danh sách sản phẩm
+        /// </summary>
+        /// <returns></returns>
         public List<SANPHAM> getAllSanPham()
         {
             List<SANPHAM> result = null;
@@ -192,13 +186,21 @@ namespace DAL_SuperMarket
             var result = new Result(false, "", "");
 
             var db = new NEWDAY_MARKETEntities();
-            var u = db.SANPHAM.FirstOrDefault(b => b.MASP == sp.MASP);
+            var u = db.SANPHAM.SingleOrDefault(b => b.MASP == sp.MASP);
             if (u != null)
             {
                 try
                 {
-                    u = sp;
-                    db.SaveChanges();
+                    u.TENSP = sp.TENSP;
+                    u.MALOAI = sp.MALOAI;
+                    u.LOAISANPHAM = sp.LOAISANPHAM;
+                    u.SLBB = sp.SLBB;
+                    u.THOIHAN = sp.THOIHAN;
+                    u.THUONGHIEU = sp.THUONGHIEU;
+                    u.TINHTRANG = sp.TINHTRANG;
+                    u.SLTONKHO = sp.SLTONKHO;
+                    
+                    db.SaveChangesAsync();
                     result._is_Success = true;
                 }
                 catch (Exception e)
@@ -243,6 +245,17 @@ namespace DAL_SuperMarket
             return result;
         }
 
+        public List<CHIETKHAU> getAllChietKhau()
+        {
+            List<CHIETKHAU> result = null;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.CHIETKHAU.ToList();
+            
+
+            return result;
+        }
+        
         /// <summary>
         /// Thêm chiết khẩu mới
         /// </summary>
@@ -267,6 +280,7 @@ namespace DAL_SuperMarket
                 newck.THOIGIANKT = ck.THOIGIANKT;
                 newck.TENLOAI = ck.TENLOAI;
 
+                db.CHIETKHAU.Add(newck);
                 db.SaveChanges();
                 result._is_Success = true;
             }
@@ -385,12 +399,12 @@ namespace DAL_SuperMarket
         /// </summary>
         /// <param name="maLoai"></param>
         /// <returns></returns>
-        public Result xoaLoaiSanPham(string maLoai)
+        public Result xoaLoaiSanPham(string tenLoai)
         {
             var result = new Result(false, "", "");
 
             var db = new NEWDAY_MARKETEntities();
-            var u = db.LOAISANPHAM.FirstOrDefault(b => b.MASP == maLoai);
+            var u = db.LOAISANPHAM.FirstOrDefault(b => b.TENLOAI == tenLoai);
             if (u != null)
             {
                 try
@@ -403,13 +417,13 @@ namespace DAL_SuperMarket
                 {
                     result._is_Success = false;
                     result._error = e.ToString();
-                    result._result = "Không thể xóa Mặt hàng";
+                    result._result = "Không thể xóa Loại sản phẩm";
                 }
             }
             else
             {
                 result._is_Success = false;
-                result._result = "Mặt hàng không tồn tại";
+                result._result = "Loại sản phẩm không tồn tại";
             }
 
             return result;
@@ -438,29 +452,40 @@ namespace DAL_SuperMarket
                 {
                     result._is_Success = false;
                     result._error = e.ToString();
-                    result._result = "Không thể sửa mặt hàng";
+                    result._result = "Không thể sửa Loại sản phẩm";
                 }
             }
             else
             {
                 result._is_Success = false;
-                result._result = "Mặt hàng không tồn tại";
+                result._result = "Loại sản phẩm không tồn tại";
             }
 
             return result;
         }
 
         /// <summary>
-        /// Tìm loại sản phẩm
+        /// Lấy Danh sách Loại sản phẩm
         /// </summary>
         /// <param name="tenMatHang"></param>
         /// <returns></returns>
-        public List<LOAISANPHAM> getLoaiSanPham(string tenMatHang)
+        public List<LOAISANPHAM> getAllLoaiSanPham()
         {
-            List<LOAISANPHAM> result = null;
+            List<LOAISANPHAM> result = new List<LOAISANPHAM>();
 
             var db = new NEWDAY_MARKETEntities();
-            result = db.LOAISANPHAM.Where(b => b.TENLOAI == tenMatHang).ToList();
+            result = db.LOAISANPHAM.ToList();
+
+            return result;
+        }
+
+        public int getMaLoaiSanPham(string tenloai)
+        {
+            int result = 0;
+
+            var db = new NEWDAY_MARKETEntities();
+            var lsp = db.LOAISANPHAM.FirstOrDefault(b => b.TENLOAI == tenloai);
+            result = lsp.MALOAI;
 
             return result;
         }
@@ -478,6 +503,16 @@ namespace DAL_SuperMarket
 
             var db = new NEWDAY_MARKETEntities();
             result = db.PHIEUXUATHANG.Where(b => b.MASP == masp).ToList();
+
+            return result;
+        }
+
+        public List<PHIEUXUATHANG> getAllPhieuXuatHang()
+        {
+            List<PHIEUXUATHANG> result = null;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.PHIEUXUATHANG.ToList();
 
             return result;
         }
@@ -506,7 +541,7 @@ namespace DAL_SuperMarket
             {
                 result._is_Success = false;
                 result._error = e.ToString();
-                result._result = "Không thể thêm";
+                result._result = "Không thể thêm Phiếu xuất hàng";
             }
 
             return result;
@@ -595,6 +630,16 @@ namespace DAL_SuperMarket
 
             var db = new NEWDAY_MARKETEntities();
             result = db.PHIEUNHAPHANG.Where(b => b.MASP == masp).ToList();
+
+            return result;
+        }
+
+        public List<PHIEUNHAPHANG> getAllPhieuNhapHang()
+        {
+            List<PHIEUNHAPHANG> result = null;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.PHIEUNHAPHANG.ToList();
 
             return result;
         }
@@ -722,12 +767,22 @@ namespace DAL_SuperMarket
         /// <param name="date1"></param>
         /// <param name="date2"></param>
         /// <returns></returns>
-        public List<HOADON> getHoaDonTheoNgay(DateTime date1, DateTime date2)
+        public HOADON getHoaDonTheoNgay(DateTime date1, DateTime date2)
+        {
+            HOADON result;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.HOADON.Single(b => b.NGAYTT >= date1 && b.NGAYTT <= date2);
+
+            return result;
+        }
+
+        public List<HOADON> getAllHoaDon()
         {
             List<HOADON> result;
 
             var db = new NEWDAY_MARKETEntities();
-            result = db.HOADON.Where(b => b.NGAYTT > date1 && b.NGAYTT < date2).ToList();
+            result = db.HOADON.ToList();
 
             return result;
         }
@@ -1006,6 +1061,16 @@ namespace DAL_SuperMarket
             return result;
         }
 
+        public List<KHTT> getAllKhtt()
+        {
+            List<KHTT> result;
+
+            var db = new NEWDAY_MARKETEntities();
+            result = db.KHTT.ToList();
+
+            return result;
+        }
+
         /// <summary>
         /// Thêm khách hàng thân thiết
         /// </summary>
@@ -1016,7 +1081,7 @@ namespace DAL_SuperMarket
             var result = new Result(false, "", "");
 
             var db = new NEWDAY_MARKETEntities();
-            var u = db.KHTT.Where(b => b.CMND == khtt.CMND || b.SDT == khtt.SDT);
+            var u = db.KHTT.FirstOrDefault(b => b.CMND == khtt.CMND || b.SDT == khtt.SDT);
 
             if (u == null)
             {
@@ -1037,13 +1102,13 @@ namespace DAL_SuperMarket
                 {
                     result._is_Success = false;
                     result._error = e.ToString();
-                    result._result = "Không thể thêm sản phẩm mới";
+                    result._result = "Không thể thêm KHTT  mới";
                 }
             }
             else
             {
                 result._is_Success = false;
-                result._result = "Sản phẩm đã tồn tại";
+                result._result = "Thông tin KHTT đã tồn tại";
             }
 
             return result;

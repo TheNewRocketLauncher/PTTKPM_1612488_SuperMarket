@@ -17,7 +17,7 @@
         WindowStartupLocation ="CenterScreen"
         Title="Quản lý" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
     <Grid>
-        <TabControl Margin="5" BorderThickness="0" Background="#FFCECEFF" FontSize="20" Grid.ColumnSpan="2">
+        <TabControl Margin="5" BorderThickness="0" Background="#FFCECEFF" FontSize="20" Grid.ColumnSpan="2" SelectionChanged="TabControl_SelectionChanged">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -90,7 +90,6 @@
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                         Name="TTDataGridItems"
-                        MaxHeight="400"
                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}" >
                         <DataGrid.Columns>
                             <DataGridTextColumn
@@ -99,7 +98,7 @@
                                 Header="Mã SP" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                MinWidth="450"
+                                MinWidth="300"
                                 Binding="{Binding TENSANPHAM}"
                                 Header="Tên sản phẩm" 
                                 IsReadOnly="True"/>
@@ -114,6 +113,10 @@
                             <materialDesign:MaterialDataGridTextColumn
                                 Binding="{Binding DONGIA}"
                                 Header="Đơn giá" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding GIAMGIA}"
+                                Header="Giảm giá" 
                                 IsReadOnly="True"/>
                             <DataGridTextColumn
                                 Binding="{Binding GIA}"
@@ -183,14 +186,6 @@
                         </Button>
                         <Button
                             Margin="1,1,1,1"
-                            Name="TTbtnDiscount"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            MinWidth="70" Height="50"
-                            Click="TTbtnDiscount_Click">
-                            Chiết khấu
-                        </Button>
-                        <Button
-                            Margin="1,1,1,1"
                             Name="TTbtnXoaSanPham"
                             Style="{StaticResource MaterialDesignRaisedLightButton}"
                             MinWidth="70" Height="50"
@@ -208,8 +203,8 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
-            
+
+
             <TabItem Header="Quản lý">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -230,16 +225,20 @@
                                 materialDesign:HintAssist.Hint="Tìm kiếm" 
                                 MinWidth="700" Height="50"
                                 FontSize="20"
+                                ItemsSource="{Binding searchDATAQL}"
+                                Text="{Binding SelectedItemText, Mode=TwoWay}"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                             </ComboBox>
                             <ComboBox
                                 DockPanel.Dock="Left"
                                 Name="QLSPcbxType"
+                                HorizontalContentAlignment="Center"
                                 materialDesign:HintAssist.Hint="{Binding QLSPcbxChoose}" 
                                 MinWidth="170" Height="50"
                                 FontSize="20"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                 SelectedItem="Sản Phẩm" 
+                                SelectionChanged="QLSPcbxType_SelectionChanged"
                                 ItemsSource="{Binding QLSPcbxSource}">
                             </ComboBox>
                         </DockPanel>
@@ -255,35 +254,53 @@
                          AutoGenerateColumns="False"
                          materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                          materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                         Name="DataGridSANPHAM"
+                         Name="GridViewSANPHAM"
                          SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn
-                                MinWidth="50"
-                                Binding="{Binding MASANPHAM}"
+                                Binding="{Binding MASP}"
                                 Header="Mã SP" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                MinWidth="150"
-                                Binding="{Binding TENSANPHAM}"
+                                Binding="{Binding TENSP}"
                                 Header="Tên sản phẩm" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding THUONGHEU}"
+                                Binding="{Binding MALOAI}"
+                                Header="Mã loại" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding NSX}"
+                                Header="Ngày sản xuất" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THOIHAN}"
+                                Header="Thời hạn" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THUONGHIEU}"
                                 Header="Thương hiệu" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding PRICE}"
-                                Header="Nhà sản xuất" 
+                                Binding="{Binding THOIHAN}"
+                                Header="Giá tiền" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding PRICE}"
-                                Header="NSX" 
+                                Binding="{Binding SLTONKHO}"
+                                Header="SL Tồn kho" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SLBB}"
+                                Header="SL Bài bán" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding TINHTRANG}"
+                                Header="Tình trạng" 
                                 IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid
-                        Visibility="Visible"
+                        Visibility="Hidden"
                         Grid.Column="0"
                         Grid.Row="1"
                         Margin="0 8 0 0"
@@ -293,30 +310,232 @@
                         AutoGenerateColumns="False"
                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                        Name="DataGridHOADON"
+                        Name="GridViewCHIETKHAU"
                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <materialDesign:MaterialDataGridTextColumn
-                                MinWidth="50"
-                                Binding="{Binding MASANPHAM}"
-                                Header="Mã HD" 
+                                Binding="{Binding STT}"
+                                Header="STT" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                MinWidth="150"
-                                Binding="{Binding TENSANPHAM}"
+                                Binding="{Binding MASP}"
+                                Header="MASP" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding CK}"
+                                Header="Chiết khấu" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THOIGIANBD}"
+                                Header="Thời gian BD" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THOIGIANKT}"
+                                Header="Thời gian KT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding TENLOAI}"
+                                Header="Tên loại" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewLOAISANPHAM"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MALOAI}"
+                                Header="Mã loại" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding TENLOAI}"
+                                Header="Tên loại" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewPHIEUNHAPHANG"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding STT}"
+                                Header="STT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MASP}"
+                                Header="MASP" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SL}"
+                                Header="Số lượng" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewPHIEUXUATHANG"
+                         SelectedItem="{Binding Path=Selected, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding STT}"
+                                Header="STT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MASP}"
+                                Header="MASP" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SL}"
+                                Header="Số lượng" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewHOADON"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MAHD}"
+                                Header="Mã Hóa đơn" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding NGAYTT}"
+                                Header="Ngày thanh toán" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MAKHTT}"
+                                Header="Mã KHTT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding TONGTIEN}"
+                                Header="Tổng tiền" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewCHITIETHOADON"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding STT}"
+                                Header="STT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MAHD}"
+                                Header="Mã Hóa đơn" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MASP}"
+                                Header="Mã sản phẩm" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SL}"
                                 Header="Số lượng" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding PRICE}"
-                                Header="Thương hiệu" 
+                                Binding="{Binding DONGIA}"
+                                Header="Đơn giá" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding PRICE}"
-                                Header="Nhà sản xuất" 
+                                Binding="{Binding CHIETKHAU}"
+                                Header="Chiết khấu" 
                                 IsReadOnly="True"/>
                             <materialDesign:MaterialDataGridTextColumn
-                                Binding="{Binding PRICE}"
-                                Header="NSX" 
+                                Binding="{Binding KHTT}"
+                                Header="Mã KHTT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THANHTIEN}"
+                                Header="Thành Tiền" 
+                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Visibility="Hidden"
+                         Margin="0 8 0 0"
+                         ItemsSource="{Binding ItemSource}"
+                         CanUserSortColumns="True"
+                         CanUserAddRows="False"
+                         AutoGenerateColumns="False"
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                         Name="GridViewKHTT"
+                         SelectedItem="{Binding Path=SelectedBook, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding MAKHTT}"
+                                Header="MAKHTT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding CMND}"
+                                Header="CMND" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding SDT}"
+                                Header="SĐT" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding BAC}"
+                                Header="Bậc" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding THOIHAN}"
+                                Header="Thời hạn" 
+                                IsReadOnly="True"/>
+                            <materialDesign:MaterialDataGridTextColumn
+                                Binding="{Binding TIENTL}"
+                                Header="Tiền tích lũy" 
                                 IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -349,9 +568,6 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Thống kê">
-
             </TabItem>
             <TabItem Header="Quản lý tài khoản">
 

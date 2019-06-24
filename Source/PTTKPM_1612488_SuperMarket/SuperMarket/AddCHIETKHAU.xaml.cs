@@ -12,33 +12,50 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Fluent;
-using BUS_SuperMarket;
 using DAL_SuperMarket;
+using BUS_SuperMarket;
 
 namespace SuperMarket
 {
     /// <summary>
-    /// Interaction logic for ValidKHTT.xaml
+    /// Interaction logic for AddCHIETKHAU.xaml
     /// </summary>
-    public partial class AddKHTT : RibbonWindow
+    public partial class AddCHIETKHAU : RibbonWindow
     {
-        public AddKHTT()
+        public AddCHIETKHAU()
         {
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(AddCHIETKHAULoaded);
+        }
+
+        private void AddCHIETKHAULoaded(object sender, RoutedEventArgs e)
+        {
+            List<string> searchDATA = new List<string>();
+
+            var sp = new SanPham();
+            List<SANPHAM> sANPHAMs = sp.GetAllSANPHAM();
+            foreach (var item in sANPHAMs)
+            {
+                searchDATA.Add(item.MASP);
+            }
+
+            txtMASP.ItemsSource = searchDATA;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var newkhtt = new KHTT();
-                newkhtt.SDT = txtSDT.Text;
-                newkhtt.CMND = txtCMND.Text;
-                
+                var newCK = new CHIETKHAU();
+                newCK.MASP = txtMASP.Text;
+                newCK.CK = float.Parse(txtCHIETKHAU.Text, System.Globalization.CultureInfo.InvariantCulture);
+                newCK.THOIGIANBD = THOIGIANBD.SelectedDate;
+                newCK.THOIGIANKT = THOIGIANKT.SelectedDate;
+                newCK.TENLOAI = txtTENLOAI.Text;
 
-                var khtt = new KhachHangTT();
-                var result = khtt.ThemKHTT(newkhtt);
-                
+                var ck = new ChietKhau();
+                var result = ck.ThemChietKhau(newCK);
+
                 if (result._is_Success)
                 {
                     MessageBox.Show("Thêm thành công");
@@ -50,7 +67,7 @@ namespace SuperMarket
             }
             catch
             {
-                MessageBox.Show("Có lỗi xẩy ra, vui lòng xem lại dữ liệu vừa nhập", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Có lỗi xẩy ra, vui lòng xem lại dữ liệu vừa nhập","", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -66,6 +83,5 @@ namespace SuperMarket
 
             }
         }
-        
     }
 }

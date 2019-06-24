@@ -10,12 +10,22 @@ namespace BUS_SuperMarket
 {
     public class LoaiSanPham
     {
-        public List<LOAISANPHAM> GetLoaiSanPham(string tenLoaiSanPham)
+        public List<LOAISANPHAM> GetAllLoaiSanPham()
         {
             List<LOAISANPHAM> result;
 
             var pd = new Product();
-            result = pd.getLoaiSanPham(tenLoaiSanPham);
+            result = pd.getAllLoaiSanPham();
+
+            return result;
+        }
+
+        public int GetMaLoaiSanPham(string tenloai)
+        {
+            int result;
+
+            var pd = new Product();
+            result = pd.getMaLoaiSanPham(tenloai);
 
             return result;
         }

@@ -18,6 +18,7 @@ namespace DAL_SuperMarket
         public KHTT()
         {
             this.CHITIETHOADON = new HashSet<CHITIETHOADON>();
+            this.HOADON = new HashSet<HOADON>();
         }
     
         public int MAKHTT { get; set; }
@@ -29,5 +30,7 @@ namespace DAL_SuperMarket
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETHOADON> CHITIETHOADON { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HOADON> HOADON { get; set; }
     }
 }

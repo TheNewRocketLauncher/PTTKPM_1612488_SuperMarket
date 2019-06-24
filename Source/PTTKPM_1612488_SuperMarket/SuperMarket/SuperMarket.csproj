@@ -79,6 +79,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddCHIETKHAU.xaml.cs">
+      <DependentUpon>AddCHIETKHAU.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddLOAISANPHAM.xaml.cs">
+      <DependentUpon>AddLOAISANPHAM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPHIEUNHAPHANG.xaml.cs">
+      <DependentUpon>AddPHIEUNHAPHANG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddPHIEUXUATHANG.xaml.cs">
+      <DependentUpon>AddPHIEUXUATHANG.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddSP.xaml.cs">
       <DependentUpon>AddSP.xaml</DependentUpon>
     </Compile>
@@ -98,6 +110,22 @@
     <Compile Include="AddKHTT.xaml.cs">
       <DependentUpon>AddKHTT.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddCHIETKHAU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddLOAISANPHAM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPHIEUNHAPHANG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPHIEUXUATHANG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddSP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,7 +180,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\img\BG.jpg" />
@@ -169,10 +199,6 @@
     <ProjectReference Include="..\DAL_SuperMarket\DAL_SuperMarket.csproj">
       <Project>{2f9fd6d2-919a-4124-95f5-c738a8465902}</Project>
       <Name>DAL_SuperMarket</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DTO_SuperMarket\DTO_SuperMarket.csproj">
-      <Project>{5d7c8836-24e3-41ec-beec-0681941839ff}</Project>
-      <Name>DTO_SuperMarket</Name>
     </ProjectReference>
     <ProjectReference Include="..\PublicClass\PublicClass.csproj">
       <Project>{f296f0e8-ad69-4572-9a7d-c7e7ab86b428}</Project>

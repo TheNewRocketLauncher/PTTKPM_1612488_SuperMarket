@@ -20,6 +20,16 @@ namespace BUS_SuperMarket
             return resutl;
         }
 
+        public List<PHIEUNHAPHANG> GetAllPhieuNhapHang()
+        {
+            List<PHIEUNHAPHANG> resutl;
+
+            var pd = new Product();
+            resutl = pd.getAllPhieuNhapHang();
+
+            return resutl;
+        }
+
         public Result ThemPhieuNhapHang(PHIEUNHAPHANG pnh)
         {
             Result result = new Result();
